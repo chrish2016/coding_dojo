@@ -1,0 +1,39 @@
+* {
+    display: block;
+}
+
+#square {
+    width: 140px;
+    height: 140px;
+    background: hotpink;
+}
+
+#circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: aquamarine;
+}
+
+#triangle {
+
+    width: 0;
+	height: 0;
+	border-left: 70px solid transparent;
+	border-right: 70px solid transparent;
+	border-bottom: 140px solid red;
+}
+
+#pacman {
+    width: 0px;
+    height: 0px;
+    border-right: 140px solid transparent;
+    border-top: 140px solid yellow;
+    border-left: 140px solid yellow;
+    border-bottom: 140px solid yellow;
+    border-top-left-radius: 140px;
+    border-top-right-radius: 140px;
+    border-bottom-left-radius: 140px;
+    border-bottom-right-radius: 140px;
+
+}
