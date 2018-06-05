@@ -1,0 +1,75 @@
+* {
+    margin: 0px 0px 10px 0px;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 25px;
+}
+
+.book {
+    font-style: italic;
+}
+
+.col {
+    display: block;
+    vertical-align: top;
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+header {
+    background-color: darkgrey;
+    border: 1px solid darkgray;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+main {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+}
+
+footer {
+    background-color: yellow;
+    border: 1px solid darkgray;
+}
+
+@media only screen and (max-width: 480px){
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .sm-4 {
+        width: 100%;
+    }
+    .sm-0 {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .med-2 {
+        width: 100%;
+    }
+    .med-0 {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .lg-1 {
+        width: 100%;
+    }
+
+    .lg-0 {
+        display: none;
+    }
+
+}

@@ -1,0 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: chartreuse;
+}
+
+.book {
+    font-style: italic;
+}
+
+.col {
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+}
+
+.row {
+    padding: 10px;
+    border: 3px solid blue;
+}
+
+
+@media only screen and (max-width: 480px){
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .sm-4 {
+        width: 100%;
+    }
+    .sm-0 {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px){
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .med-2 {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    /* we will set these stylings only if the device is a screen with a width of 480px or less */
+    .lg-1 {
+        width: 25%;
+    }
+    
+    .lg-3 {
+        width: 75%;
+    }
+
+}
