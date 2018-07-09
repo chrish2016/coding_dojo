@@ -1,0 +1,1 @@
+alert('You have reached the NINJAS PAGE');
