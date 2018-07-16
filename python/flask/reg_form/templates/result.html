@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reg_form.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/reg_form.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+    </head>
+    <body>
+      <h1>Registration Page</h1>
+      <h3>THANK YOU FOR JOINING!</h3>
+      <form action="" method="post">
+            <p>First Name: {{ result['first_name'] }}</p>
+            <p>Last Name: {{ result['last_name'] }}</p>
+            <p>Email: {{ result['email'] }}</p>     
+            <!-- <p>Password: {{ result['password'] }}</p>
+            <p>Password Confirmation: {{ result['pw_confirm'] }}</p> -->
+            <p>Birthday: {{ result['birthday'] }}</p>
+        </form>
+        <form action="/" method="GET">
+            <input type="submit" value="Go Back">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Great Number Game</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/gng.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/gng.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+        <style>
+            header{
+                display: inline-block;
+                line-height: 200%;
+            }
+            h1 {
+                font-size: 60px;
+                color: aquamarine;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the GREAT NUMBER GAME</h1>
+            <h2>I am thinking of a number between 1 and 100</h2>
+            <h2>this is your guess</h2>
+            <h1>{{ session.number }} </h1>
+            <h1>{{ session['machine'] }} </h1>
+            <h1>{{ joe }} </h1>
+            {% if session['number'] < session['machine'] %}
+            <h1>You're Low</h1> 
+            {% elif session['number'] > session['machine'] %}
+            <h1>You're High</h1>
+            {% elif session['number'] == session['machine'] %}
+            <h1>You're correct</h1>
+            <a href="/reset"><button>Play Again</button></a>
+            {% endif %}
+        </header>
+        <main>
+            <form action='/guess' method='post'>
+                Number: <input type='text' name='number'>
+                <input type='submit' value='guess'>
+            </form>
+        </main> 
+    </body>
+</html>

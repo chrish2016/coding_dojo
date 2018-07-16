@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Counter</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/counter.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/counter.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+    </head>
+    <body>
+        <!-- <div id="counter">Counter</div> -->
+      <h1>Counter</h1>
+      <h3>{{session.count}} times.</h3>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+    </body>
+</html>

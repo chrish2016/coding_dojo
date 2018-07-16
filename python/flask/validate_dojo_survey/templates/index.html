@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dojo_survey.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/dojo_survey.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+    </head>
+    <body>
+      <h1>Dojo Survey</h1>
+      <h3>Create a User</h3>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <form action="/process" method="post">
+            <p>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </p>
+            <p>
+                <label for="location">Location</label>
+                <select name="location">
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="San Jose">San Jose</option>
+                    <option value="Seattle">Seattle</option>
+                </select>
+            </p>
+            <p>
+                <label for="language">Favorite Language</label>
+                <select name="language">
+                    <option value="python">python</option>
+                    <option value="css">css</option>
+                    <option value="javascript">javascript</option>
+                </select>
+            </p>
+    
+            <p>
+                <h4>Comment(optional)</h4>
+                <textarea name="comment" id="comment" rows="10" cols="50" placeholder="share with us!"></textarea>
+            </p>
+            <input type="submit" value="Submit"><input type="reset">
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </body>
+</html>

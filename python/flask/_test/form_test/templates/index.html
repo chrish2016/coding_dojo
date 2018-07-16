@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Landing Page Exercise</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form_test.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/form_test.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+    </head>
+    <body>
+      <h1>Index Page</h1>
+      <h3>Create a User</h3>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <form action='/users' method='post'>
+          Name: <input type='text' name='name'>
+          Email: <input type='text' name='email'>
+          <input type='submit' value='create user'>
+      </form>
+    </body>
+</html>

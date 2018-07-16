@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/disappearing_ninja.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/disappearing_ninja.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/{username}.jpg') }}"> -->
+    </head>
+  <body>
+    <h1>{{ username }}</h1>
+    <img src="{{ url_for('static', filename='img/') }}{{username}}.jpg"/>
+    
+    <form action="/" method="GET">
+        <input type="submit" value="Go Back">
+    </form>
+   
+  </body> 
+</html>
+

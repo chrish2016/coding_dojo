@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dojo Survey</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dojo_survey.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/dojo_survey.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+    </head>
+    <body>
+      <h1>Result Page</h1>
+      <h3>Create a User</h3>
+      <form action="" method="post">
+            <p>Name: {{ request.form.name }}</p>
+            <p>Location: {{ request.form.location }}</p>
+            <p>Favorite Language: {{ request.form.language }}</p>     
+            <p>Comment: {{ request.form.comment }}</p>
+        </form>
+        <form action="/" method="GET">
+            <input type="submit" value="Go Back">
+        </form>
+        <h6>(optional)</h6>
+        <p>{{ name }}</p>
+        <p>{{ location }}</p>
+        <p>{{ language }}</p>
+        <p>{{ comment }}</p>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mainstyle.css') }}">
+</head>
+<body>
+    <header>
+        <h1>BASIC FORM VALIDATION</h1>
+    </header>
+    <form action='/process' method='POST'>
+        Name:<input type="text" name="name">
+        <input type="submit" value="Submit">
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{message}}</p>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Great Number Game</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/gng.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/gng.js' )}} "></script>
+        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+        <style>
+            header{
+                display: inline-block;
+                line-height: 200%;
+            }
+            h1 {
+                font-size: 60px;
+                color: aquamarine;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to the GREAT NUMBER GAME</h1>
+            <h2>I am thinking of a number between 1 and 100</h2>
+            <h2>Take a guess!</h2>
+        </header>
+        <main>
+            <form action='/guess' method='post'>
+                Number: <input type='text' name='number'>
+                <input type='submit' value='guess'>
+            </form>
+        </main>
+        <!-- <div id="counter">Counter</div> -->
+      <!-- <h1>Counter</h1>
+      <h3>{{session.count}} times.</h3> -->
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+    </body>
+</html>
