@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            table, th, td {
+                border: 2px solid hotpink;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                
+            }
+            th {
+                text-align: left;
+                color: hotpink;
+            }
+            h1{
+                font-size: 8em;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                letter-spacing: 0.2em;
+                color: hotpink;
+            }
+            #create_form{
+                font-size: 14px;
+                margin: 2em;
+                line-height: 150%;
+            }
+            </style>
+    </head>
+    <body>
+        <header>
+           
+          <h1>Edit Friend#{{id}}</h1>
+        </header>
+        <main>{% for user in user %}
+                <form action='/friends/<id>' method='POST'>
+                    <label for="first_name">First Name:<input type="text" name="first_name" id="first_name" value="{{user.first_name}}" ></label><br>
+                    <label for="last_name">Last Name:<input type="text" name="last_name" id="last_name" value="{{user.last_name}}" ></label><br>
+                    <label for="email">Email:<input type="text" name="email" id="email" value="{{user.email}}"></label><br>
+                    <input type="submit" value="create">
+                  </form>
+                  {% endfor %}
+        </main>
+        
+    </body>
+</html>

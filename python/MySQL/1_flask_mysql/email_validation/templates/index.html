@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reg_form.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/reg_form.js' )}} "></script>
+    </head>
+    <body>
+        <header>
+          <h1>Enter Email Addresses:</h1>  
+        </header>
+        <form action='/process' method='POST'>
+            <label for="email">Email:<input type="text" name="email" id="email"></label>
+            <input type="submit" value="Add"><input type="reset">
+        </form>
+        <main>      
+            <div></div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+               <hr>
+            </div>
+        </main>
+    </body>
+</html>

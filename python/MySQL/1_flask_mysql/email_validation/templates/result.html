@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reg_form.css' )}} ">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/reg_form.js' )}} "></script>
+    </head>
+    <body>
+        <header>
+          <h1>Email Addresses Entered:</h1>  
+        </header>
+        <main>      
+            <div></div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+
+               {% for user in all_users %}
+                <p>ID: {{ user['id'] }}</p>
+                <p>Email: {{ user['email'] }}</p>
+                <p>Created at: {{ user['created_at'] }}</p>
+                <p>Updated at: {{ user['updated_at'] }}</p>
+                <hr>
+                {% endfor %}
+               <hr>
+               <h2>Delete an email</h2>
+                <form action="/remove_email/<user_id>" method="POST">
+                    <input type="text" name="id" placeholder="ID#">
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

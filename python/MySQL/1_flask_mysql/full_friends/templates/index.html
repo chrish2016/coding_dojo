@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            table, th, td {
+                border: 2px solid hotpink;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                
+            }
+            th {
+                text-align: left;
+                color: hotpink;
+            }
+            h1{
+                font-size: 8em;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                letter-spacing: 0.2em;
+                color: hotpink;
+            }
+            #create_form{
+                font-size: 14px;
+                margin: 2em;
+                line-height: 150%;
+            }
+            </style>
+    </head>
+    <body>
+        <header>
+          <h1>FULL FRIENDS</h1>
+        </header>
+        <main>
+        <div class="w3-container">           
+            <table class="w3-table w3-striped">
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+              {% for user in all_users %}
+              <tr>
+                <td> {{ user['first_name'] }}</td>
+                <td>{{ user['last_name'] }}</td>
+                <td>{{ user['email'] }}</td>
+                <td>
+                <form method="POST" action="/friends/{{ user['id'] }}/edit" style="display: inline">
+                    <button type="submit" name="user_id" id="user_id">Edit</button>
+                </form>
+                <form method="POST" action="/friends/{{ user['id'] }}/delete" style="display: inline">
+                    <button type="submit" name="user_id" id="user_id">Delete</button>
+                </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div id="create_form">
+          <form action='/friends' method='POST'>
+            <label for="first_name">First Name:<input type="text" name="first_name" id="first_name"></label><br>
+            <label for="last_name">Last Name:<input type="text" name="last_name" id="last_name"></label><br>
+            <label for="email">Email:<input type="text" name="email" id="email"></label><br>
+            <input type="submit" value="create">
+          </form>
+        </div>
+        </main>
+    </body>
+</html>
