@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+    </head>
+    <body>
+        <header>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+          <h1>Hello {{ current_user.email }}!</h1>
+            {% for user in all_users %}
+                <p>First Name:{{ user['first_name'] }}</p>
+                <p>Last Name:{{ user['last_name'] }}</p>
+                <p>Email:{{ user['email'] }}</p>
+                <p>Password:{{ user['password'] }}</p>
+                <p>Salt:{{ user['salt'] }}</p>
+                <hr>
+            {% endfor %}
+        </header>
+        <main>      
+            <div>
+                <form action="/logout", method="GET">
+                    <input type="submit" name="logout" value="logout">
+                </form>
+            </div>
+            <form action="/users", method="GET">
+                <input type="submit" name="users" value="see other users">
+            </form>
+                
+               <hr>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+h1 {
+  color: hotpink;
+  font-size: 48px;
+}
+
+.jumbotron {
+  margin: 0px 10px;
+  width: 400px;
+}
+
+.login {
+  padding: 20px;
+}

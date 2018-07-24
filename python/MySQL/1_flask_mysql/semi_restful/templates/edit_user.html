@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{% for user in all_users %}{{user['first_name']}}'s Profile Page{% endfor %} {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <!-- <h1>Hello, {% if session['username'] %}{{ name }}{% else %}Stranger{% endif %}!</h1> -->
+    </div>
+    
+    <div class="jumbotron">
+        {% for user in all_users %}
+        <h1 class="display-1">Meet {{user['first_name']}}.</h1>
+        <p class="lead">It was last updated <span>{{user['updated_at']}}</span>. Feel free to update it anytime you want.</p>
+        <hr class="my-4">
+        <h3 class="display-4">First Name: {{user['first_name']}}</h3>
+        <h3 class="display-4">Last Name: {{user['last_name']}}</h3>
+        <h3 class="display-4">Email: {{user['email']}}</h3>
+        <h3 class="display-4">Password: {{user['password']}}</h3>
+        {% endfor %}
+        <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Edit Profile Page</a> -->
+    </div>
+    <div class="create_user">
+            {% for user in all_users %}
+            <form action="/users/<id>", method="POST">
+                <div class="form-group col-lg-4">
+                    <label for="code">First Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{user.first_name}}" >
+                    <label for="code">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" value="{{user.last_name}}">
+                    <label for="code">Email</label>
+                    <input type="text" name="email" class="form-control" value="{{user.email}}">
+                    <label for="code">Password</label>
+                    <input type="text" name="password" class="form-control" value="{{user.password}}">
+                    <button type="submit" name="update_user"  class="btn btn-info btn-lg">Submit</button>
+                </div>
+            </form>
+            {% endfor %}
+    </div>
+    
+{% endblock %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}

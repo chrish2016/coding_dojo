@@ -1,1 +1,1 @@
-SELECT * FROM users;
+SELECT email, pw_hash FROM users;

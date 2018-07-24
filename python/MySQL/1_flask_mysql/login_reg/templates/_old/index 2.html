@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+    </head>
+    <body>
+        <header>
+            <h1>Login Here:</h1>  
+
+            <form action="/login" method="POST">
+                <input type="text" placeholder="email" name="email" value="{{ request.form.email }}">
+                 <input type="password" placeholder="password" name="password" value="{{ request.form.password }}">
+                <input class="btn btn-default" type="submit" value="Login">
+              </form>
+              {% if error %}
+                <p class="error"><strong>Error:</strong> {{ error }}
+              {% endif %}
+
+                {% if current_user.is_authenticated %}
+                        Hi {{ current_user.first_name }}!
+                {% endif %}
+
+
+          <h1>Register Here:</h1>
+          <form action='/register' method='POST'>
+            <label for="first_name">First Name:<input type="text" name="first_name"></label><br>
+            <label for="last_name">Last Name:<input type="text" name="last_name" id="last_name"></label><br>
+            <label for="email">Email:<input type="text" name="email" id="email"></label><br>
+            <label for="password">Password:<input type="text" name="password" id="password"></label><br>
+            <label for="confirm">Password:<input type="text" name="confirm" id="confirm"></label><br>
+            <input type="submit" value="register">
+          </form>
+        </header>
+        
+        <main>      
+            <div></div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+               <hr>
+            </div>
+        </main>
+    </body>
+</html>

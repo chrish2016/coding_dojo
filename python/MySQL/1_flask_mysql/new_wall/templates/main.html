@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}The Wall{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Hello, {% if current_user %}{{ current_user.first_name }}{% else %}Stranger{% endif %}!</h1>
+        {% if current_user %}
+        <small><a href="/logout" action="/logout">LOGOUT</a> </small>
+        {% endif %}
+    </div>
+{% endblock %}

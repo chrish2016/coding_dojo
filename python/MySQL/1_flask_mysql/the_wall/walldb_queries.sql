@@ -1,0 +1,1 @@
+SELECT id, first_name and last_name AS full_name, email, password, created_at FROM users;

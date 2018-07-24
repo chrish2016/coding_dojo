@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+    </head>
+    <body>
+        <nav>
+            <form action="/logout", method="GET">
+                <input type="submit" name="logout" value="logout">
+            </form>
+            <form action="/profile", method="GET">
+                <input type="submit" name="profile" value="back to profile page">
+            </form>
+        </nav>
+        <header>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+          <h1>Thank you for registering!</h1>
+            {% for user in all_users %}
+                <p>First Name:{{ user['first_name'] }}</p>
+                <p>Last Name:{{ user['last_name'] }}</p>
+                <p>Email:{{ user['email'] }}</p>
+                <p>Password:{{ user['password'] }}</p>
+                <p>Salt:{{ user['salt'] }}</p>
+                <hr>
+                    
+            {% endfor %}
+        </header>
+        <main>      
+            <div></div>
+                
+
+               <hr>
+               <h2>Delete an email</h2>
+            </div>
+        </main>
+    </body>
+</html>

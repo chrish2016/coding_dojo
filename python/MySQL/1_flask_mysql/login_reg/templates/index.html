@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Form</title>
+    </head>
+    <body>
+        <header>
+            <h1>Login Here:</h1>
+            <fieldset>
+                <form action='/login' method='POST'>
+                    <input type="email" name="email" placeholder="(email address)"><br>
+                    <input type="password" name="password" placeholder="(password)"><br>
+                    <input type="submit" value="login">
+                </form>
+            </fieldset>  
+        <h1>Register Here:</h1>
+        <fieldset>
+            <form action='/register' method='POST'>
+                <input type="text" name="first_name" placeholder="(first name)">
+                <input type="text" name="last_name" placeholder="(last name)">
+                <input type="email" name="email" placeholder="(email address)">
+                <input type="password" name="password" placeholder="(password)">
+                <input type="password" name="confirm" placeholder="(retype password)">
+                <input type="submit" value="register">
+            </form>
+          </fieldset>
+        </header>
+        <main>
+            <div></div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+               <hr>
+            </div>   
+        </main>
+    </body>
+</html>

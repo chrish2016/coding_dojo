@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{% for user in all_users %}{{user['first_name']}}'s Profile Page{% endfor %} {% endblock %}
+
+{% block page_content %}
+
+    <div class="page-header">
+        
+    </div>
+    {% for user in all_users %}
+    <div class="jumbotron">
+            <h1 class="display-1">Meet {{user['first_name']}}.</h1>
+        <p class="lead">This is your info. It was last updated <span>{{user['updated_at']}}</span>. Feel free to update it anytime you want.</p>
+        <hr class="my-4">
+        <h3 class="display-4">First Name: {{user['first_name']}}</h3>
+        <h3 class="display-4">Last Name: {{user['last_name']}}</h3>
+        <h3 class="display-4">Email: {{user['email']}}</h3>
+        <h3 class="display-4">Password: {{user['password']}}</h3>      
+        <a class="btn btn-primary btn-lg" a href="/users/{{user['id']}}/edit" role="button">Edit Profile Page</a>
+    </div>
+    {% endfor %} 
+
+{% endblock %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
