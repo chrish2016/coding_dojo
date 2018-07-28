@@ -1,0 +1,29 @@
+<http>
+        <head>
+            <title>Random Word Generator</title>
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'rwg/css/rwg.css' %}" media="screen" title="no title"  charset="utf-8">
+        </head>
+        <body>
+            <header>
+                <h1>Random Word Generator</h1>
+                <small>(attempt #{{request.session.counter}})</small>
+            </header>
+            <nav>
+                <div class="line">{{randomword}}</div>
+                <form class="rwg_form" action='.' method='post'>
+                    {% csrf_token %}
+                    <!-- <input type='button' value='{{ random_string }}' name='random_string'> -->
+                    <button id='rwg_button' type='submit'>submit</button>
+                </form>
+                <form action="/reset" method="post">
+                    {% csrf_token %}
+                    <button type="submit" value="Reset">Reset</button>
+                </form>
+            </nav>
+            <section>
+                
+            </section>
+        </body>
+    </http>
+    

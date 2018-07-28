@@ -1,0 +1,24 @@
+<http>
+    <head>
+        <title>blog</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'blogs/css/blogs.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <header>
+            <h1>Blog</h1>
+        </header>
+        <nav>
+            <h3>Name: {{name}}</h3><br>
+            <h3>Email: {{email}}</h3><br>
+        </nav>
+        <section>
+            <form action="create/" method="post">
+                {% csrf_token %}
+                Blog Name: <input type="text" name="name" placeholder="blog name"><br>
+                Description: <textarea name="desc" placeholder="description"></textarea>
+                <input type="submit" value="submit">
+            </form>
+        </section>
+    </body>
+</http>
