@@ -2,14 +2,12 @@
 <html lang="en">
     <head>
         <title>Dojo Survey</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dojo_survey.css' )}} ">
-        <script type="text/javascript" src="{{ url_for('static', filename='js/dojo_survey.js' )}} "></script>
-        <!-- <img src="{{ url_for('static', filename='img/test.png') }}"> -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'survey/css/survey.css' %}" media="screen" title="no title"  charset="utf-8">
     </head>
     <body>
       <h1>Dojo Survey</h1>
       <h3>Create a User</h3>
-      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
       <form action="/result" method="post">
             <p>
                 <label for="name">Name:</label>

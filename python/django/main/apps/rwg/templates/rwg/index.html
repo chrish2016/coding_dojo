@@ -11,9 +11,12 @@
             </header>
             <nav>
                 <div class="line">{{randomword}}</div>
-                <form class="rwg_form" action='.' method='post'>
+                <form action="/process" method="POST">
+                    <input type="submit" name="process" value="process">
+                </form>
+                
+                <form class="rwg_form" action='/process' method='POST'>
                     {% csrf_token %}
-                    <!-- <input type='button' value='{{ random_string }}' name='random_string'> -->
                     <button id='rwg_button' type='submit'>submit</button>
                 </form>
                 <form action="/reset" method="post">

@@ -1,0 +1,33 @@
+<http>
+        <head>
+            <title>Survey Form</title>
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'survey/css/survey.css' %}" media="screen" title="no title"  charset="utf-8">
+        </head>
+        <body>
+            <header>
+                <h1>SUBMITTED</h1>
+                <div class="submitted">
+                    <h3>Thank you for submitting your form.</h3>
+                    <h5>Number of submissions: {{ request.session.counter }} times.</h5>
+                </div>
+            </header>
+            <nav>
+            </nav>
+            <section>
+               <p>Name: {{ request.session.name }}</p>
+               <p>Location: {{ request.session.location }}</p>
+               <p>Favorite Language: {{ request.session.language}}</p>
+               <p>Comments: {{ request.session.comment }}</p>
+               <form action="/" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="go back">    
+                </form>
+                <form action="/reset/" method="post">
+                    {% csrf_token %}
+                    <button type="submit" value="Reset">Reset</button>
+                </form>
+            </section>
+        </body>
+    </http>
+    

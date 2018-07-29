@@ -1,0 +1,36 @@
+body {
+    display: block;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+h1 {
+    font-size: 48px;
+    color: magenta;
+    text-align: center;
+}
+
+nav {
+    display: block;
+    text-align: center;
+}
+
+section {
+    display: block;
+    text-align: center;
+}
+
+.rwg_form {
+    display: block;
+    padding-top: 1em;
+    /* text-align: center; */
+}
+
+.line {
+    font-size: 5em;
+    color: aqua;
+}
+
+header {
+    text-align: center;
+}
