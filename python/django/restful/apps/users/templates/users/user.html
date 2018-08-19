@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Semi-Restful</title>
+{% load static %}
+        <link rel="stylesheet" href="{% static 'user/css/user.css' %}" media="screen" title="no title"  charset="utf-8">
+        <style>
+            section {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                line-height: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        </header>
+        <section>
+            <h3>First Name: </h3><p></p>{{ user.first_name }}</p><br>
+            <h3>Last Name: </h3><p>{{ user.last_name }}</p><br>
+            <h3>Email: </h3><p>{{ user.email }}</p><br>
+            <h3>Joined: </h3><p>{{ user.created_at }}</p><br>
+            <h3>Last Updated: </h3><p>{{ user.updated_at }}</p><br>
+        </section>
+        <section>
+            <button><a href="/users/">Back</a></button>
+            <button><a href="/users/{{ user.id }}/edit/">Edit</a></button>
+        </section>
+    </body>
+</html>

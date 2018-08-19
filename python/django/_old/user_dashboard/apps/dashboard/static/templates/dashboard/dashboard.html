@@ -1,0 +1,45 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">{{ request.session.user.first_name }} Dashboard of Members</h1>
+                <p class="lead">These are the members!</p>
+                <!-- <hr class="my-4">
+                <p></p>
+                <a class="btn btn-primary btn-lg" href="/register" role="button">Start Now!</a> -->
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Joined</th>
+                        <th scope="col">Admin</th>
+                    </tr>
+                </thead>
+                {% for user in users %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.first_name }} {{ user.last_name}}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.created_at }}</td>
+                        <td>{{ user.admin }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

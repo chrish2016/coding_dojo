@@ -1,0 +1,27 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                
+                
+                <h1 class="display-4">Welcome {{ user.first_name }}.</h1>
+                <p><strong>Registered at: </strong>{{ user.created_at }}</p>
+                <p><strong>User ID: </strong>{{ user.id }}</p>
+                <p><strong>Email: </strong>{{ user.email }}</p>
+                <p><strong>Description: </strong>{{ user.description }}</p>
+                
+                
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+{% endblock %}

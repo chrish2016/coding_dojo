@@ -1,0 +1,46 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <style>
+        .login {
+            margin-top: 400px;
+            margin-left: 35%;
+            margin-right: auto;
+        }
+    </style>
+    <!-- Flash Messages -->
+    {% if messages %}
+    <div id="container">
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            <p><li>{% if message.tags %}{% endif %}{{ message }}</li></p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}    
+    <form action="/logging/" class="login" method="POST">
+        {% csrf_token %}
+        <h1>Please sign in here:</h1>
+        <p></p>
+        <div class="col-5">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="text" name="email" class="form-control form-control-sm." id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <a class="nav-link" href="/new">Don't have an account? Register here:</a>
+    </form>
+</div>
+
+
+{% endblock %}

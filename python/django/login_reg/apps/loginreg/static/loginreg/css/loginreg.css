@@ -1,0 +1,27 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+table, th, td {
+    border: 2px solid hotpink;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    
+}
+th {
+    text-align: left;
+    color: hotpink;
+}
+h1{
+    font-size: 5em;
+    text-align: center;
+    letter-spacing: -0.0125em;
+    color: black;
+}
+#create_form{
+    font-size: 14px;
+    margin: 2em;
+    line-height: 150%;
+}

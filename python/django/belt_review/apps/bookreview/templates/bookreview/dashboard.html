@@ -1,0 +1,47 @@
+{% extends "bookreview/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-2">Welcome, {{user.alias}}</h1>
+                <hr class="my-6">
+                <p class="lead">These are the books below:</p>
+                <form action="/book/form" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark">Submit a book | review</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Recent Book Reviews</h1>
+                <div class="container">
+                    {% for review in reviews %}
+                    <h5><a href="book/{{ review.bookreviewed.id }}">{{review.bookreviewed.title}}</a></h5><br>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p><a href="/user/{{ review.reviewer.id }}">{{ review.reviewer.first_name }}</a> Says: <i>{{ review.review }}</i></p>
+                    <small>Posted on {{ book.created_at }}</small><br>
+                    <hr class="my-6">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="col-md-4">
+                <h5>More books here:</h5>
+                {% for book in books %}
+                <p><a href="/book/{{ book.id }}">{{ book.title }}</p></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

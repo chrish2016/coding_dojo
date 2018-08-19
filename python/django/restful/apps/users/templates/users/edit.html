@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Semi-Restful</title>
+{% load static %}
+        <link rel="stylesheet" href="{% static 'users/css/users.css' %}" media="screen" title="no title"  charset="utf-8">
+        <style>
+            section {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                line-height: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        </header>
+        <section>
+            <h3>First Name: </h3><p></p>{{ user.first_name }}</p><br>
+            <h3>Last Name: </h3><p>{{ user.last_name }}</p><br>
+            <h3>Email: </h3><p>{{ user.email }}</p><br>
+            <h3>Joined: </h3><p>{{ user.created_at }}</p><br>
+            <h3>Last Updated: </h3><p>{{ user.updated_at }}</p><br>
+        </section>
+        <form action="/users/{{ user.id }}/update/" method="POST">
+            {% csrf_token %}
+            <p>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{user.first_name}}">
+            </p>
+            <p>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{user.last_name}}">
+            </p>
+            <p>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="{{user.email}}">
+            </p>
+            <input type="submit" value="Submit"><button><a href="/users/">Back</a></button>
+        </form>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,288 @@
+(djangoEnv) Chriss-iMac:django chris$ django-admin startproject dojo_ninjas
+(djangoEnv) Chriss-iMac:django chris$ cd dojo_ninjas
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ ls
+dojo_ninjas     manage.py
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ mkdir apps
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ cd apps
+(djangoEnv) Chriss-iMac:apps chris$ touch __init__.py
+(djangoEnv) Chriss-iMac:apps chris$ python ../manage.py startapp ninjas
+(djangoEnv) Chriss-iMac:apps chris$ ls
+__init__.py     ninjas
+(djangoEnv) Chriss-iMac:apps chris$ cd ..
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ ls
+apps            dojo_ninjas     manage.py
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:14:24
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /
+[05/Aug/2018 03:14:37] "GET / HTTP/1.1" 404 2063
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:14:53
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[05/Aug/2018 03:14:58] "GET / HTTP/1.1" 200 20
+[05/Aug/2018 03:15:02] "GET / HTTP/1.1" 200 20
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin,auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:17:14
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin,auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:24:43
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin,auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:27:53
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin,auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+August 05, 2018 - 03:31:18
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+^C(djangoEnv) Chriss-iMac:dojo_ninjas chris$
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+Migrations for 'ninjas':
+  apps/ninjas/migrations/0001_initial.py:
+    - Create model Dojo
+    - Create model Ninja
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying ninjas.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2018 - 03:32:32
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+^C(djangoEnv) Chriss-iMac:dojo_ninjas chris$
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 12:01:12)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.ninjas.models import *
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Ninja.objects.all()
+<QuerySet []>
+>>> Dojo.objects.create(dojo_name=‘CodingDojo Silicon Valley', city='Mountain View', state=‘CA’)
+  File "<console>", line 1
+    Dojo.objects.create(dojo_name=‘CodingDojo Silicon Valley', city='Mountain View', state=‘CA’)
+                                  ^
+SyntaxError: invalid syntax
+>>> Ninja.objects.create(dojo_name='CodingDojo Silicon Valley', city='Mountain View', state='CA')Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 397, in create
+    obj = self.model(**kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/base.py",line 555, in __init__
+    raise TypeError("'%s' is an invalid keyword argument for this function" % list(kwargs)[0])
+TypeError: 'city' is an invalid keyword argument for this function
+>>> Dojo.objects.create(dojo_name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+<Dojo: Dojo object>
+>>> Dojo.objects.create(dojo_name="CodingDojo Seattle", city="Seattle", state="WA")
+<Dojo: Dojo object>
+>>> Ninja.objects.all()
+<QuerySet []>
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>, <Dojo: Dojo object>]>
+>>> Dojo.objects.create(dojo_name="CodingDojo New York", city="New York", state="NY")
+<Dojo: Dojo object>
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>]>
+>>> Dojo.objects.create(dojo_name="CodingDojo Los Angeles", city="Los Angeles", state="CA")
+<Dojo: Dojo object>
+>>> Dojo.objects.create(dojo_name="CodingDojo San Jose", city="San Jose", state="CA")
+<Dojo: Dojo object>
+>>> Dojo.objects.create(dojo_name="CodingDojo Dallas", city="Dallas", state="TX")
+<Dojo: Dojo object>
+>>> Dojo.objects.create(dojo_name="CodingDojo Chicago", city="Chicago", state="ILL")
+<Dojo: Dojo object>
+>>> Dojo.objects.all().dojo_name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'dojo_name'
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>]>
+>>> Dojo.objects.get(id=4).delete())
+  File "<console>", line 1
+    Dojo.objects.get(id=4).delete())
+                                   ^
+SyntaxError: invalid syntax
+>>> Ninja.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 385, in get
+    self.model._meta.object_name
+DoesNotExist: Ninja matching query does not exist.
+>>> Dojo.objects.get(id=4)
+<Dojo: Dojo object>
+>>> Dojo.objects.delete()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'delete'
+>>> d = Dojo.objects.get(id=4)
+>>> d.delete()
+(1, {u'ninjas.Ninja': 0, u'ninjas.Dojo': 1})
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>]>
+>>> d = Dojo.objects.get(id=5)
+>>> d.delete()
+(1, {u'ninjas.Ninja': 0, u'ninjas.Dojo': 1})
+>>> d = Dojo.objects.get(id=6)
+>>> d.delete()
+(1, {u'ninjas.Ninja': 0, u'ninjas.Dojo': 1})
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>, <Dojo: Dojo object>]>
+>>> >>>
+>>> this_dojo = Dojo.objects.get(id=1)
+>>> my_ninja = Ninja.objects.create(first_name="Chris", last_name="Hamilton", dojo=Dojo.objects.get(id=1))
+>>> my_ninja = Ninja.objects.create(first_name="Takako", last_name="Hamilton", dojo=Dojo.objects.get(id=1))
+>>> my_ninja = Ninja.objects.create(first_name="Joe", last_name="Hamilton", dojo=Dojo.objects.get(id=1))
+>>> my_ninja = Ninja.objects.create(first_name="Lisa", last_name="Savary", dojo=Dojo.objects.get(id=2))
+>>> my_ninja = Ninja.objects.create(first_name="Fabian", last_name="Savary", dojo=Dojo.objects.get(id=2))
+>>> my_ninja = Ninja.objects.create(first_name="Kylian", last_name="Savary", dojo=Dojo.objects.get(id=2))
+>>> my_ninja = Ninja.objects.create(first_name="Michael", last_name="Jackson", dojo=Dojo.objects.get(id=3))
+>>> my_ninja = Ninja.objects.create(first_name="Tito", last_name="Jackson", dojo=Dojo.objects.get(id=3))
+>>> my_ninja = Ninja.objects.create(first_name="Jermaine", last_name="Jackson", dojo=Dojo.objects.get(id=3))
+>>> Ninja.objects.filter(dojo_id=1)
+<QuerySet [<Ninja: Ninja object>, <Ninja: Ninja object>, <Ninja: Ninja object>]>
+>>> Ninja.objects.filter(dojo_id=1).first_name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'first_name'
+>>>
+KeyboardInterrupt
+>>> quit
+Use quit() or Ctrl-D (i.e. EOF) to exit
+>>> ^D
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py runserver
+Unhandled exception in thread started by <function wrapper at 0x103d98500>
+Traceback (most recent call last):
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/core/management/commands/runserver.py", line 113, in inner_run
+    autoreload.raise_last_exception()
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/utils/autoreload.py", line 249, in raise_last_exception
+    six.reraise(*_exception)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/__init__.py", line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/apps/registry.py", line 108, in populate
+    app_config.import_models(all_models)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/apps/config.py", line 199, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/chris/Documents/coding_dojo/python/django/dojo_ninjas/apps/ninjas/models.py", line 5, in <module>
+    class Dojo(models.Model):
+  File "/Users/chris/Documents/coding_dojo/python/django/dojo_ninjas/apps/ninjas/models.py", line 9, in Dojo
+    desc = models.CharField(min_length=255)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 1043, in __init__
+    super(CharField, self).__init__(*args, **kwargs)
+TypeError: __init__() got an unexpected keyword argument 'min_length'
+
+^D
+
+
+
+
+quit
+exit
+^C(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 05, 2018 - 04:24:13
+Django version 1.10, using settings 'dojo_ninjas.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+^C(djangoEnv) Chriss-iMac:dojo_ninjas chris$
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existingrows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 2
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existingrows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 2
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+Migrations for 'ninjas':
+  apps/ninjas/migrations/0002_dojo_desc.py:
+    - Add field desc to dojo
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying ninjas.0002_dojo_desc... OK
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$

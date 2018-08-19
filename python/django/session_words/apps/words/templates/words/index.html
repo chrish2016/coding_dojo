@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <head>
+        <title>Session Words</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'words/css/words.css' %}" media="screen" title="no title"  charset="utf-8">        
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to Session Words</h1>
+        </header>
+        <section>
+            <aside>
+                <h3>Add a new word…</h3>
+                    <form action='/words/process' method='POST'>
+                    {% csrf_token %}
+                          <label for="word">Enter Word:<input type="text" name="word" id="word"></label><br>
+                          <input type="submit" value="create">
+                    </form>
+            </aside>
+            <aside>
+                <h3>Words entered</h3>
+                <table>
+                    <tr>
+                        <th>Word</th>
+                        <th>Date Added:</th>
+                    </tr>
+                    <tr>{% csrf_token %}
+                        <td>{{ request.session.new_word }}</td><br><hr>
+                    </tr>
+                </table>
+                <form action="/words/reset" method="post">
+                {% csrf_token %}
+                    <button type="submit" value="Reset">Reset</button>
+                </form>
+            </aside>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+{% load bootstrap4 %}
+<html>
+    <head>
+        <title>Django Test</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: bolder;
+            letter-spacing: -0.02em;
+        }
+    </style>
+    </head>
+    <body>
+        {% if 'user_id' not in request.session %}        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Test App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                    {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/{{ user.id }}/">Profile</a>
+                    </li>
+                        <a class="nav-link" href="/logout">Sign Out</a>
+                    </li>
+                    <li class="nav-item active">
+                </ul>
+            </div>
+            {% endif %}
+        </nav>
+    {% block content %}
+        {% bootstrap_messages %}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                </div>
+            </div>
+        </div>
+        <header>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">Register Here</h1>
+                    <p class="lead">Register as many users as you'd like!</p>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <div class="col-md-6 mb-8">
+                <form action="/process" method="POST">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="exampleInputEmail1">Email address:</label>
+                    <input type="text" class="form-control form-control-sm." name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">First Name:</label>
+                    <input type="text" class="form-control" name="first_name" id="exampleInputPassword1" placeholder="first name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Last Name:</label>
+                    <input type="text" class="form-control" name="last_name" id="exampleInputPassword1" placeholder="last name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Description</label>
+                    <textarea name="description" class="form-control" id="exampleInputPassword1" placeholder="about yourself…"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password:</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password Confirmation</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="confirmation" placeholder="password confirmation">
+                </div><br>
+                <button type="submit" class="btn btn-info">Submit</button>
+                </form>
+                <a class="nav-link" href="/">Cancel</a>
+            </div>
+        </div>
+    </body>    
+    {% endblock content %}
+</html>
+
+
+

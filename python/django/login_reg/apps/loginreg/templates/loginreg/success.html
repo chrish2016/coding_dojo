@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login/Register</title>
+{% load static %}
+        <link rel="stylesheet" href="{% static 'loginreg/css/loginreg.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <header>
+            <h1>SUCCESS! Welcome{{ user.first_name }}.</h1>
+        </header>
+        <section>
+            <p>You have successfully registered(or logged in)</p>
+        </section>
+        <form action='/' method='GET'>
+            <input type="submit" value="BACK">
+        </form>
+    </body>
+</html>

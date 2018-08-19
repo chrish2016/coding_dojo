@@ -1,0 +1,30 @@
+table, th, td {
+    border: 2px solid hotpink;
+    border-collapse: collapse;
+}
+    h, td {
+    padding: 5px;
+    
+}
+th {
+    text-align: left;
+    color: hotpink;
+}
+h1{
+    font-size: 8em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    letter-spacing: 0.2em;
+    color: hotpink;
+}
+#create_form{
+    font-size: 14px;
+    margin: 2em;
+    line-height: 150%;
+}
+
+aside {
+    display: inline-block;
+    width: 400px;
+    height: auto;
+}

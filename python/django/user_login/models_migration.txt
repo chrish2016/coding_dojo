@@ -1,0 +1,188 @@
+August 03, 2018 - 21:09:46
+Django version 1.10, using settings 'user_login.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+^C(djangoEnv) Chriss-iMac:user_login chris$
+(djangoEnv) Chriss-iMac:user_login chris$ ls
+apps            db.sqlite3      manage.py       user_login
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py makemigrations
+Migrations for 'login':
+  apps/login/migrations/0001_initial.py:
+    - Create model User
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, login, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying login.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(djangoEnv) Chriss-iMac:user_login chris$ ls
+apps            db.sqlite3      manage.py       user_login
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 12:01:12)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> User.objects.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'User' is not defined
+>>> from apps.login.mondels import *
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: No module named mondels
+>>> from apps.login.models import *
+>>> User.objects.all()
+<QuerySet []>
+>>> User.objects.create(first_name='Chris', last_name='Hamilton', email_address='chris_hamilton11@yahoo.com', age='42')
+<User: User object>
+>>> User.objects.all()
+<QuerySet [<User: User object>]>
+>>> User.objects.create(first_name='Joe', last_name='Hamilton', email_address='joe1@cox.net', age='69')
+<User: User object>
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>]>
+>>> u = User(first_name='Takako', last_name='Hamilton', email_address='t_hamilton1@yahoo.com', age='70')
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>]>
+>>> b.save()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'b' is not defined
+>>> u.save()
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>, <User: User object>]>
+>>> User.objects.first()
+<User: User object>
+>>> User.objects.first().name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'User' object has no attribute 'name'
+>>> User.objects.first().first_name
+u'Chris'
+>>> User.objects.last()
+<User: User object>
+>>> User.objects.first().email_address
+u'chris_hamilton11@yahoo.com'
+>>> User.objects.get(order by first_name DESC)
+  File "<console>", line 1
+    User.objects.get(order by first_name DESC)
+                            ^
+SyntaxError: invalid syntax
+>>> User.objects.order_by('first_name')
+<QuerySet [<User: User object>, <User: User object>, <User: User object>]>
+>>> User.objects.order_by('first_name').desc())
+  File "<console>", line 1
+    User.objects.order_by('first_name').desc())
+                                              ^
+SyntaxError: invalid syntax
+>>> User.objects.order_by('first_name').desc()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'desc'
+>>> User.objects.order_by('first_name').order_by(desc())
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'desc' is not defined
+>>> User.objects.all().order_by('first_name', desc())
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'desc' is not defined
+>>> ^D
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py makemigrations
+SystemCheckError: System check identified some issues:
+
+ERRORS:
+login.User: (models.E004) 'id' can only be used as a field name if the field also sets 'primary_key=True'.
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py makemigrations
+Migrations for 'login':
+  apps/login/migrations/0002_auto_20180803_2137.py:
+    - Alter field id on user
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, login, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying login.0002_auto_20180803_2137... OK
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 12:01:12)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> User.objects.last()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'User' is not defined
+>>> from apps.login.models import *
+>>> User.objects.last()
+<User: User object>
+>>> User.objects.get(id=2)
+<User: User object>
+>>> User.objects.get(id=3)
+<User: User object>
+>>> u = User.objects(id=3)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'Manager' object is not callable
+>>> u = User.objects.id(3)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'id'
+>>> b = User.objects.get(id=3)
+>>> b.first_name
+u'Takako'
+>>> b.last_name
+u'Hamilton'
+>>> b.last_name = 'Sendai-Hamilton'
+>>> b.save()
+>>> b.last_name()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'str' object is not callable
+>>> b.last_name
+'Sendai-Hamilton'
+>>> u = User.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 385, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+>>> User.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/query.py", line 385, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+>>> User.objects.create(first_name='Lisa', last_name='Hamilton-Savary', email_address='lisa@france.com', age='46')
+<User: User object>
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>, <User: User object>, <User: User object>]>
+>>> u = User.objects.get(id=4)
+>>> u.delete()
+(1, {u'login.User': 1})
+>>> User.objects.all()
+<QuerySet [<User: User object>, <User: User object>, <User: User object>]>
+>>> ^D
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py makemigrations
+No changes detected
+(djangoEnv) Chriss-iMac:user_login chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, login, sessions
+Running migrations:
+  No migrations to apply.

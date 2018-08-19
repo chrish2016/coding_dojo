@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">Welcome to the Test</h1>
+                <p class="lead">We're going to build a cool application using a MVC framework! This application was built with the Village88 folks!</p>
+                <hr class="my-4">
+                <p></p>
+                <a class="btn btn-primary btn-lg" href="/register" role="button">Start Now!</a>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Manage Users</h3>
+                <p>Using this application, you'll learn how to add, remove, and edit users for the application.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Leave Messages</h3>
+                <p>Users will be able to leave a message to another user using this application.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Edit User Information</h3>
+                <p>Admins will be able to edit another user's information(email address, first name, last name, etc).</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

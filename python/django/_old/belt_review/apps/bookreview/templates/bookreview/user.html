@@ -1,0 +1,40 @@
+{% extends "bookreview/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-2">Welcome, {{ user.alias }} !</h1>
+                <hr class="my-4">
+                <p><strong>Registered: </strong>{{ user.created_at }}</p>
+                <p><strong>User ID: </strong>{{ user.id }}</p>
+                <p><strong>First: </strong>{{ user.first_name }}</p>
+                <p><strong>Last: </strong>{{ user.last_name }}</p>
+                <p><strong>Alias: </strong>{{ user.alias }}</p>
+                <p><strong>Email: </strong>{{ user.email }}</p>
+                <p><strong>Description: </strong>{{ user.description }}</p>
+                <small><a href="/edit">edit</a></small>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Recent Book Reviews:</h3>
+            </div>
+            <div class="col-md-2">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="col-md-4">
+                <h5>More books here:</h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

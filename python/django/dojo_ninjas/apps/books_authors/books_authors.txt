@@ -1,0 +1,186 @@
+Migrations for 'books_authors':
+  apps/books_authors/migrations/0001_initial.py:
+    - Create model Author
+    - Create model Book
+    - Add field books to author
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors, contenttypes, ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying books_authors.0001_initial... OK
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 12:01:12)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on da win
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.books_authors.models import *
+>>> Book.objects.all()
+<QuerySet []>
+>>> Author.objects.all()
+<QuerySet []>
+>>> Book.objects.create(name="C Sharp", desc="About C Sharp")
+<Book: Book object>
+>>> Book.objects.create(name="Java", desc="About Java")
+<Book: Book object>
+>>> Book.objects.create(name="Python", desc="About Python")
+<Book: Book object>
+>>> Book.objects.create(name="PHP", desc="About PHP")
+<Book: Book object>
+>>> Book.objects.create(name="Ruby", desc="About Ruby")
+<Book: Book object>
+>>> Book.objects.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>]>
+>>> Author.objects.create(first_name="Mike", last_name="Knight", email="mike@home.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Speros", last_name="Papadoupalous", email="speros@home.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="John", last_name="Letterman", email="john@home.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Jaydee", last_name="Blackman", email="jaydee@home.com")
+<Author: Author object>
+>>> Author.objects.create(first_name="Jay", last_name="Walk", email="jay@home.com")
+<Author: Author object>
+>>> Author.objects.all()
+<QuerySet [<Author: Author object>, <Author: Author object>, <Author: Author object>, <Author: Author object>, <Author: Author object>]>
+>>>
+KeyboardInterrupt
+>>> ^D
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 2
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 2
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'note' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 2
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> max_length=1000
+Invalid input: invalid syntax (<string>, line 1)
+>>> exit
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py makemigrations
+Migrations for 'books_authors':
+  apps/books_authors/migrations/0002_author_notes.py:
+    - Add field notes to author
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors, contenttypes, ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying books_authors.0002_author_notes... OK
+(djangoEnv) Chriss-iMac:dojo_ninjas chris$ python manage.py shell
+Python 2.7.14 (v2.7.14:84471935ed, Sep 16 2017, 12:01:12)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.books_authors.models import *
+>>> Book.objects.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>]>
+>>> b = Book.objects.get(id=1)
+>>> b.name()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'unicode' object is not callable
+>>> b.name
+u'C Sharp'
+>>> b = Book.objects.get(id=5)
+>>> b.name
+u'Ruby'
+>>> b.name = "C#"
+>>> b.save()
+>>> b.name
+'C#'
+>>> a = Author.objects.get(id=5)
+>>> a.name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Author' object has no attribute 'name'
+>>> a.first_name
+u'Jay'
+>>> a.first_name="Ketul"
+>>> a.first_name
+'Ketul'
+>>> a.save()
+>>> this_author = Author.objects.get(id=1)
+>>> this_book = Book.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_author = Author.objects.get(id=1)
+>>> this_book = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_author.books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>]>
+>>> this_author = Author.objects.get(id=2)
+>>> this_book = Book.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_author = Author.objects.get(id=3)
+>>> this_book = Book.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=4)
+>>> this_author.books.add(this_book)
+>>> this_author = Author.objects.get(id=4)
+>>> this_book = Book.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=4)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=5)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=3)
+>>> this_book.objects.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/Users/chris/Documents/coding_dojo/python/django/djangoEnv/lib/python2.7/site-packages/django/db/models/manager.py", line 186, in __get__
+    raise AttributeError("Manager isn't accessible via %s instances" % cls.__name__)
+AttributeError: Manager isn't accessible via Book instances
+>>> this_book.authors.all()
+<QuerySet [<Author: Author object>, <Author: Author object>, <Author: Author object>]>
+>>> this_book.authors.all().first_name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'first_name'
+>>> this_book.authors.all()
+<QuerySet [<Author: Author object>, <Author: Author object>, <Author: Author object>]>
+>>> b = Book.objects.first()
+>>> b.delete()
+(5, {u'books_authors.Book': 1, u'books_authors.Author_books': 4})
+>>> b.save()
+>>> b = Book.objects.get(id=3)
+>>> b = Book.objects.get(id=3).authors.first()
+>>> b.delete()
+(3, {u'books_authors.Author': 1, u'books_authors.Author_books': 2})
+>>> b = Book.objects.get(id=2)>>>
+>>> this_book = Book.objects.get(id=2)
+>>> this_author = Author.objects.get(id=5)
+>>> this_author.books.add(this_book)
+>>> this_author = Author.objects.get(id=3)
+>>> this_author.books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>]>

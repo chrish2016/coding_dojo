@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Semi-Restful</title>
+{% load static %}
+        <link rel="stylesheet" href="{% static 'restful/css/restful.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <header>
+            <h1>{{ request.session.first_name }}'s Users</h1>
+        </header>
+        <section>
+            <table>
+            <tr>
+                <th>Member</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                <form method="POST" action="/users/{{ user.id }}/" style="display: inline">
+                {% csrf_token %}
+                    <button type="submit" name="user.id" id="user.id">Show</button>
+                </form>
+                <form method="POST" action="/users/{{ user.id }}/edit/" style="display: inline">
+                {% csrf_token %}
+                    <button type="submit" name="user.id" id="user.id">Edit</button>
+                </form>
+                <form method="POST" action="/users/{{ user.id }}/delete/" style="display: inline">
+                {% csrf_token %}
+                    <button type="submit" name="user.id" id="user.id">Delete</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </table>
+        </section>
+        <button><a href="/users/new/">Add User</a></button>
+    </body>
+</html>

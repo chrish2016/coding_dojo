@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Amadon</title>
+      {% load static %}
+    <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="{% static 'amadon_app/css/amadon_app.css' %}" media="screen" title="no title"  charset="utf-8">
+    <!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->    
+    </head>
+    <body>
+        <header><h1>Amadon Store</h1></header>
+        <nav></nav>
+        <section>   
+            <table class="id_2000">
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td> {{ id_2000.product }}</td>
+                    <td>{{ id_2000.price }}</td>
+                    <td>
+                        <form action='/amadon/buy' method='post'>
+                        {% csrf_token %}
+                        <select name="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td>
+                            <input type='hidden' name='id_2000' value='19.99' />
+                            <input type='submit' value='Buy!'/>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td> {{ id_2001.product }}</td>
+                    <td>{{ id_2001.price }}</td>
+                    <td>
+                        <form action='/amadon/buy' method='post'>
+                        {% csrf_token %}
+                        <select name="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td>
+                            <input type='hidden' name='id_2001' value='29.99' />
+                            <input type='submit' value='Buy!'/>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td> {{ id_2002.product }}</td>
+                    <td>{{ id_2002.price }}</td>
+                    <td>
+                        <form action='/amadon/buy' method='post'>
+                        {% csrf_token %}
+                        <select name="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td>
+                            <input type='hidden' name='id_2002' value='4.99' />
+                            <input type='submit' value='Buy!'/>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td> {{ id_2003.product }}</td>
+                    <td>{{ id_2003.price }}</td>
+                    <td>
+                        <form action='/amadon/buy' method='post'>
+                        {% csrf_token %}
+                        <select name="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td>
+                            <input type='hidden' name='id_2003' value='49.99' />
+                            <input type='submit' value='Buy!'/>
+                        </form>
+                    </td>
+                </tr>
+            </table>                      
+        </section>    
+    </body>
+</html>
