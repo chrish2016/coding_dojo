@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4',
     'apps.bookreview',
     'django.contrib.admin',
     'django.contrib.auth',

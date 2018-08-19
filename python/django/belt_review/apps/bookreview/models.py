@@ -102,8 +102,8 @@ class Book(models.Model):
 class Review(models.Model):
     review = models.TextField(max_length=1000)
     rating = models.IntegerField(default=1)
-    reviewer = models.ForeignKey(User, null=True, related_name="reviews")
-    bookreviewed = models.ForeignKey(Book, null=True, related_name="reviews")
+    reviewer = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name="reviews")
+    bookreviewed = models.ForeignKey(Book, null=True, on_delete=models.CASCADE, related_name="reviews")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()

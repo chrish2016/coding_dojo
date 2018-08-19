@@ -1,5 +1,5 @@
 {% extends "bookreview/base.html" %}
-{% load bootstrap4 %}
+
 {% load static %}
 
 {% block title %}My amazing blog{% endblock %}
@@ -8,7 +8,6 @@
     <header>
         <div class="jumbotron">
             <div class="container">
-                
                 <h1 class="display-2">{{ user.alias }}'s Page.</h1>
                 <hr class="my-4">
                 <p><strong>Registered: </strong>{{ user.created_at }}</p>
@@ -19,16 +18,25 @@
                 <p><strong>Email: </strong>{{ user.email }}</p>
                 <p><strong>Description: </strong>{{ user.description }}</p>
                 <small><a href="/edit">edit</a></small>
-    
             </div>
         </div>
     </header>
+    <div class="row">
+        <div class="col-md-6">
+            {% if messages %}
+            <div class="alert alert-info" role="messages">
+                {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                
                 <h3>Recent Reviews:</h3>
                 <h5><a href="/book/{{ book.id }}">{{ book.title }}</a></h5>
                 {% for review in reviews %}
@@ -36,10 +44,7 @@
                 <h6>{{ review.review }} </h6>
                 <small>Posted by {{ review.reviewer.alias }}<i> at {{ review.created_at }}.</i></small>
                 <hr class="my-6">
-                {% endfor %}
-                
-    
-                
+                {% endfor %}    
             </div>
             <div class="col-md-2">
                 <h3></h3>
