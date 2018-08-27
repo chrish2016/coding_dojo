@@ -1,0 +1,74 @@
+{% extends 'blog/base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="container">
+        <header>
+            <div class="jumbotron" style="background-color: white">
+                <h1 class="display-1">Hello, world!</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <hr class="my-4">
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            </div>
+        </header>
+        <section>
+                {% if messages %}
+                <div class="alert alert-danger" role="messages">
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                </div>
+            <div class="row">
+                <div class="col-7">
+                    <h3>Register Here</h3>
+                    <form action="/registration" method="POST">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">First Name</label>
+                            <input type="text" class="form-control" name="first_name" id="formGroupExampleInput" placeholder="Example input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" id="formGroupExampleInput2" placeholder="Another input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Email</label>
+                            <input type="text" class="form-control" name="email" id="formGroupExampleInput" placeholder="Example input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Password</label>
+                            <input type="text" class="form-control" name="password" id="formGroupExampleInput2" placeholder="Another input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Confirm Password</label>
+                            <input type="text" class="form-control" name="password_confirm" id="formGroupExampleInput2" placeholder="Another input">
+                        </div>
+                        <button type="submit" class="btn btn-dark" aria-pressed="false" autocomplete="off">
+                        Register
+                        </button>
+                    </form>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <form action="/login" method="POST">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Email</label>
+                            <input type="text" class="form-control" name="email" id="formGroupExampleInput" placeholder="Example input">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Password</label>
+                            <input type="text" class="form-control" name="password" id="formGroupExampleInput2" placeholder="Another input">
+                        </div>
+                        <button type="submit" class="btn btn-dark" aria-pressed="false" autocomplete="off">
+                        Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

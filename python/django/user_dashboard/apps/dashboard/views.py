@@ -126,17 +126,14 @@ def update(request, user_id):
        for tag, error in errors.iteritems():
           messages.error(request, error, extra_tags=tag)
           return redirect('/user/{}/edit'.format(user_id))
-    #    return redirect('/blog/edit/'+id)
     else:
         user_to_update = User.objects.get(id=user_id)
         user_to_update.first_name = request.POST['first_name']
         user_to_update.last_name = request.POST['last_name']
         user_to_update.email = request.POST['email']
-        user_to_update.description = request.POST['description']
-        user_to_update.password = request.POST['password']
         user_to_update.save()
         
-        return redirect('/dashboard', context)
+        return redirect('/user/{}'.format(user_id), context)
 
 def delete(request, user_id):
     user = User.objects.get(id=user_id).delete()

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login/Register</title>
+{% load static %}
+        <link rel="stylesheet" href="{% static 'loginreg/css/loginreg.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <header>
+            <h1>Current Users:</h1>
+            <div id="create_form">         
+                <table class="w3-table w3-striped">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Joined</th>
+                        <th>Password</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.created_at }} </td>
+                        <td>{{ user.password }} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>    
+        </header>
+        <section>
+            <fieldset>
+                <h2>Login</h2>
+                <form action='/login' method='POST'>
+                    {% csrf_token %}
+                    <input type="text" name="email" placeholder="(email address)"><br>
+                    <input type="password" name="password" placeholder="(password)"><br>
+                    <input type="submit" value="login">
+                </form>
+            </fieldset> 
+        </section>
+        <section>
+            <fieldset>
+                <h2>Register</h2>
+                <form action='/register' method='POST'>
+                    {% csrf_token %}
+                    <input type="text" name="first_name" placeholder="(first name)">
+                    <input type="text" name="last_name" placeholder="(last name)">
+                    <input type="text" name="email" placeholder="(email address)">
+                    <input type="password" name="password" placeholder="(password)">
+                    <input type="password" name="confirm" placeholder="(retype password)">
+                    <input type="submit" value="register">
+                </form>
+            </fieldset>
+        </section>
+        <footer>
+            {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </footer>
+    </body>
+</html>

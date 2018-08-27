@@ -1,0 +1,14 @@
+body {
+    display: block;
+}
+
+h1 {
+    font-size: 48px;
+    color: magenta;
+    text-align: center;
+}
+
+nav {
+    display: block;
+    text-align: center;
+}

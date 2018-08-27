@@ -1,0 +1,94 @@
+{% extends "new_courses/base.html" %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">CATALOG</h1>
+                <p class="lead">A comprehensive list of courses and students.</p>
+                <form action="/logout" method="POST">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">logout</button>
+                </form>
+                <hr class="my-4">
+                <form action="/courses/users_courses" method="POST">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-dark btn-lg">ADD A class</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-md-6">
+            {% if messages %}
+            <div class="alert alert-info" role="messages">
+                {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form action="/courses/enroll" method="POST">
+                    {% csrf_token %}
+                    <h4>Users:</h4>
+                    <div class="form-group">
+                        <select name="user">
+                            <option name="user" value="{{user.id}}">(pick a user)</option>
+                            {% for user in users %}<option name="user" value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>{% endfor %}
+                        </select>
+                        <p></p>
+                    </div><br>
+            </div>
+            <div class="col-md-4">
+                <h4>Courses:</h4>
+                    <div class="form-group">
+                            <select name="course">
+                                <option name="course" value="{{course.id}}">(pick a course)</option>
+                                {% for course in courses %}<option name="course" value="{{course.id}}">{{course.name}}</option>{% endfor %}
+                            </select>
+                            <p></p>
+                    </div><br>
+            </div>
+            <div class="col-md-4">
+                    <button type="/courses/enroll" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-hover table-primary">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Added</th>
+                        <th scope="col"># of Students</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>{% for course in courses %}
+                        <th scope="row">1</th>
+                        <td>{{course.name}}</td>
+                        <td>{{course.description}}</td>
+                        <td>{{course.created_at}}</td>
+                        <td>
+                           {{enrolled}}
+                        </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

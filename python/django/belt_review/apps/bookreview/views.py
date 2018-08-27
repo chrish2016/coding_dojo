@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import logout
 
+
 def index(request):
     if 'user_id' in request.session:
         return redirect('/dashboard')
@@ -17,7 +18,7 @@ def register(request):
             messages.error(request, err)
         return redirect('/')
     request.session['user_id'] = result.id
-    messages.success(request, "Successfully registered!")
+    # messages.success(request, "Successfully registered!")
     return redirect('/dashboard')
 
 def login(request):
@@ -55,7 +56,7 @@ def show(request, user_id):
         return redirect('/')
     context = {
         'user': User.objects.get(id=user_id),
-        'reviews': Review.objects.all(),
+        # 'reviews': Review.objects.all(),
         'reviews': Review.objects.filter(reviewer_id=user_id),
         'books': Book.objects.all()
     }
@@ -90,7 +91,7 @@ def bookpage(request, book_id):
         'user': User.objects.get(id=request.session['user_id']),
         'reviews': Review.objects.all()
     }
-    return render(request, 'bookreview/bookpage.html', context)
+    return render(request,'bookreview/bookpage.html', context)
 
 def minireview(request, book_id):
     user = User.objects.get(id=request.session['user_id'])

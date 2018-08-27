@@ -1,0 +1,75 @@
+{% extends "new_courses/base.html" %}
+{% load static %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">COURSES</h1>
+                <p class="lead">Add a student to all bootcamp courses!</p>
+                <hr class="my-4">
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-md-6">
+            {% if messages %}
+            <div class="alert alert-info" role="messages">
+                {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Add a new course:</h2>
+                    <form action="/add" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Name:</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="name of the course">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Description</label>
+                        <textarea name="description" class="form-control" id="exampleInputPassword1" placeholder="about the course…"></textarea>
+                    </div>
+                        <button type="submit" class="btn btn-info">ADD</button>
+                    </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Added</th>
+                        <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>{% for course in courses %}
+                        <th scope="row">1</th>
+                        <td>{{course.name}}</td>
+                        <td>{{course.description}}</td>
+                        <td>{{course.created_at}}</td>
+                        <td>
+                            <a href="{{ course.id }}/remove">Remove</a>
+                        </td>
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}
