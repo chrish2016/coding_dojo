@@ -1,52 +1,85 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import re
 import bcrypt
 from django.db import models
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
+NAME_REGEX = re.compile(r'^[A-Za-z]\w+$')
 
+# Create your models here.
 class UserManager(models.Manager):
-    def validator(self, postData):
-        errors = {}
 
-        # check all fields for emptyness
-        if len(postData['first_name']) < 1:
-            errors["first_name"] = "First name cannot be empty."
-        if len(postData['last_name']) < 1:
-            errors["last_name"] = "Last name cannot be empty"
-        if len(postData['email']) < 1:
-            errors["email"] = "Email cannot be empty."
-        if not "email" in errors and not re.match(EMAIL_REGEX, postData['email']):
-            errors['email'] = "invalid email"
-        if len(postData['password']) < 1:
-            errors["password"] = "password cannot be empty."
-        else:
-            if len(self.filter(email=postData['email'])) > 1:
-                errors['email'] = "email already in use"
-
-        return errors
+    def reg_validator(self, post_data):
+        errors = []
+        if len(post_data['first_name']) < 1:
+            errors.append("First name must be given.")
+        if len(post_data['last_name']) < 1:
+            errors.append("Last name must be given.")
+        # if not re.match(NAME_REGEX, post_data['first_name']) or not re.match(NAME_REGEX, post_data['last_name']):
+        #     errors.append("Name fields must contain letters only.")
+        if len(post_data['last_name']) < 1:
+            errors.append("Email address must be given.")
+        if not re.match(EMAIL_REGEX, post_data['email']):
+            errors.append("Email address must be valid.")
+        if len(User.objects.filter(email=post_data)) > 1:
+            errors.append("This email is already registered. Please provide a different email address.")
+        if len(post_data['password']) < 3:
+            errors.append("Password must be atleast 3 characters long.")
+        if post_data['password'] != post_data['password_confirm']:
+            errors.append("Confirmation didn't match. Please try again.")
         
-    def login_validator(self, postData):
-        errors = {}
-        # check all fields for emptyness
-        if len(postData['email']) < 1:
-            errors["email"] = "Email cannot be empty."
-        if not "email" in errors and not re.match(EMAIL_REGEX, postData['email']):
-            errors['email'] = "invalid email"
-        if len(postData['password']) < 1:
-            errors["password"] = "password cannot be empty."
-        if len(self.filter(password=postData['password'])) < 1:
-                errors['password'] = "Password not in the system"
-        if len(self.filter(email=postData['email'])) < 1:
-            errors['password'] = 'password not in the system'
-        if len(self.filter(email=postData['email'])) < 1:
-            errors['email'] = "email not found in the system"
+        if not errors:
+            hashed = bcrypt.hashpw((post_data['password'].encode()), bcrypt.gensalt(5))
+            new_user= self.create(
+                first_name=post_data['first_name'],
+                last_name=post_data['last_name'],
+                email=post_data['email'],
+                password=hashed
+            )
+            return new_user
         return errors
 
+    def login_validator(self, post_data):
+        errors = []
+        if len(self.filter(email=post_data['email'])) > 0:
+            user = self.filter(email=post_data['email'])[0]
+            if not bcrypt.checkpw(post_data['password'].encode(), user.password.encode()):
+                errors.append('Email/Password do not match. Please try again.')
+        else:
+            errors.append('Email/Password error. Please try again.')
+        if errors:
+            return errors
+        return user
+
+    def update_validator(self, post_data):
+        errors = []
+        if len(post_data['first_name']) < 1:
+            errors.append("First name must be given.")
+        if len(post_data['last_name']) < 1:
+            errors.append("Last name must be given.")
+        if len(post_data['last_name']) < 1:
+            errors.append("Email address must be given.")
+        if not re.match(EMAIL_REGEX, post_data['email']):
+            errors.append("Email address must be valid.")
+        if len(User.objects.filter(email=post_data)) > 1:
+            errors.append("This email is already registered. Please provide a different email address.")
+        
+        if errors:
+            return errors
+    
+    def password_validator(self, post_data):
+        errors = []
+        if len(post_data['password']) < 3:
+            errors.append("Password must be atleast 3 characters long.")
+        if post_data['password'] != post_data['password_confirm']:
+            errors.append("Confirmation didn't match. Please try again.")
+        
+        if errors:
+            return errors
+        
 class User(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add = True)
@@ -54,4 +87,3 @@ class User(models.Model):
     objects = UserManager()
     def __str__(self):
         return self.email
-

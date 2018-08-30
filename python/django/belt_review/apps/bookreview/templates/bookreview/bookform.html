@@ -26,12 +26,12 @@
                 </div><br>
                 <div class="form-group">
                     <h5><label for="exampleInputPassword1">Author:</label></h5>
+                    <input type="text" class="form-control" name="author" id="exampleInputPassword1" placeholder="…or add a new author here:"><br>
                         <select name="author">
-                            <option name="author" value="{{book.author}}"></option>
+                            <option name="author" value="{{book.id}}"></option>
                             {% for book in books %}<option name="author" value="{{book.author}}">{{book.author}}</option>{% endfor %}
                         </select>
-                        <p></p>
-                        <input type="text" class="form-control" name="author" id="exampleInputPassword1" placeholder="…or add a new author here:">
+                        <p></p> 
                 </div><br>
                 <div class="form-group">
                         <h5><label for="exampleInputPassword1">Review:</label></h5>

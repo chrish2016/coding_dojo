@@ -7,8 +7,8 @@ from django.contrib.auth import logout
 
 
 def index(request):
-    if 'user_id' in request.session:
-        return redirect('/dashboard')
+    # if 'user_id' in request.session:
+    #     return redirect('/dashboard')
     return render(request, 'bookreview/index.html')
 
 def register(request):
@@ -28,7 +28,7 @@ def login(request):
             messages.error(request, err)
         return redirect('/')
     request.session['user_id'] = result.id
-    messages.success(request, "Successfully logged in!")
+    # messages.success(request, "Successfully logged in!")
     return redirect('/dashboard')
 
 def logout(request):

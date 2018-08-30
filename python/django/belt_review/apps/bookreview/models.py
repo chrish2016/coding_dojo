@@ -16,8 +16,8 @@ class UserManager(models.Manager):
         if len(post_data['password']) < 1:
             errors.append("password must be at least 1 characters")
         # check name fields for letter characters            
-        if not re.match(NAME_REGEX, post_data['first_name']) or not re.match(NAME_REGEX, post_data['last_name']):
-            errors.append('name fields must be letter characters only')
+        # if not re.match(NAME_REGEX, post_data['first_name']) or not re.match(NAME_REGEX, post_data['last_name']):
+        #     errors.append('name fields must be letter characters only')
         # check emailness of email
         if not re.match(EMAIL_REGEX, post_data['email']):
             errors.append("invalid email")
@@ -92,12 +92,12 @@ class User(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=50)
-    author = models.CharField(max_length=50)
+    author = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
     def __str__(self):
-        return self.title
+        return self.book
 
 class Review(models.Model):
     review = models.TextField(max_length=1000)
