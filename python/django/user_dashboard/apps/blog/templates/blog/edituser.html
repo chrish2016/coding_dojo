@@ -1,0 +1,96 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}The Dashboard{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <header>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1 class="display-4">{{user.first_name}} {{user.last_name}}</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Registered at: {{user.created_at}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>User ID: {{user.id}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>Description: {{user.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="container">
+                <div class="col-md-6">
+                    {% if messages %}
+                    <div class="alert alert-info" role="messages">
+                        {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <form action="/user/{{user.id}}/edit_profile" method="POST">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">First Name:</label>
+                                <input type="text" class="form-control" name="first_name" placeholder="first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Last Name:</label>
+                                <input type="text" class="form-control" name="last_name" placeholder="last name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address:</label>
+                                <input type="text" class="form-control form-control-sm." name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <button type="submit" class="btn btn-info">Update Profile</button>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <form action="/user/{{user.id}}/edit_description" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Description:</label>
+                                <textarea name="description" class="form-control" id="exampleInputPassword1" placeholder="about yourself…"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-info">Register</button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form action="/user/{{user.id}}/edit_password" method="POST">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password:</label>
+                                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password Confirmation</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="confirm" placeholder="password confirmation">
+                            </div><br>
+                            <button type="submit" class="btn btn-info">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

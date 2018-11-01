@@ -1,0 +1,13 @@
+<section>
+  <fieldset *ngIf='book'>
+    <legend>Selected Book</legend>
+    <div>
+      <p>ID: {{ book?.id }} </p>
+      <p>Title: {{ book?.title }} </p>
+      <p>Author: {{ book?.author }} </p>
+      <p>Pages: {{ book?.pages }} </p>
+      <p>Publisher: {{ book?.publisher }} </p>
+      <p>Year: {{ book?.year }} </p>
+    </div>
+  </fieldset>
+</section>

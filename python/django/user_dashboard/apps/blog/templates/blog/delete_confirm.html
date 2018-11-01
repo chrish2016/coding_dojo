@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}The Dashboard{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <header>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">{{user.first_name}}'s Dashboard</h1>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <p>You cannnot undo this delete.<strong> Proceed?</strong></p>
+                    <form action="/dashboard" method="POST">
+                    {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-lg">Cancel</button>
+                    </form>
+                    <form action="/user/{{user.id}}/delete_user">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-success btn-lg">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}The Dashboard{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <header>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">{{user.first_name}}'s Dashboard</h1>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="container">
+                <form action="/add_user" method="POST">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-info">Add User</button>
+                </form>
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Joined</th>
+                                <th scope="col">User Level</th>
+                                {% for user in users %}{% if user is admin %}<th scope="col">Actions</th>{% endif %}{% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for user in users %}
+                            <tr>
+                                <th scope="row">{{user.id}}</th>
+                                <td><a href="/user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.created_at}}</td>
+                                <td>{{user.admin}}</td>
+                               <td><a href="/user/{{user.id}}/edituser">Edit</a> | <a href="/user/{{user.id}}/delete_confirm">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}The Dashboard{% endblock %}
+
+{% block content %}
+    <div id="container">
+        <header>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1 class="display-4">{{user.first_name}} {{user.last_name}}</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Registered at: {{user.created_at}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>User ID: {{user.id}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>Description: {{user.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="container">
+                <div class="col-md-6">
+                    {% if messages %}
+                    <div class="alert alert-info" role="messages">
+                        {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <!-- {% for comment in user.comments.all %}
+                        <p>{{ comment.user.first_name }} said:(<small> {{ comment.created_at }}</small>)</p>
+                        <h5>{{ comment.comment }}</h5>
+                        <a class="nav-link" href="/user/{{ user.id }}/delete_comment/">Delete</a>
+                        <hr>
+                        {% endfor %} -->
+                        {% for comment in user.comments.all %}
+                        <p>{{ comment.commenter.first_name }} said:</p>
+                        <h6>"<i>{{ comment.comment }}</i>"</h6><br>
+                        <small>Posted on {{ comment.created_at }}</small>
+                        <a class="nav-link" href="/user/{{ user.id }}/delete_comment/">Delete</a>
+                        <hr>
+                        {% endfor %}
+                        
+                        
+
+                        <!-- {% for comment in user.comments.all %}
+                        <p>{{ comment.user.first_name }} said:(<small> {{ comment.created_at }}</small>)</p>
+                        <h5>{{ comment.comment }}</h5>
+                        <a class="nav-link" href="/user/{{ user.id }}/delete_comment/">Delete</a>
+                        <hr>
+                        {% endfor %} -->
+                        
+
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <h4>Say something:</h4>
+                        <div class="form-group">
+                            <form action="/user/{{user.id}}/comment" method="POST">
+                            {% csrf_token %}
+                                <textarea name="comment" class="form-control" id="exampleInputPassword1" placeholder="leave a comment…"></textarea><br>
+                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

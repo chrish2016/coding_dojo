@@ -1,57 +1,53 @@
 {% extends "bookreview/base.html" %}
-
 {% load static %}
 
-{% block title %}My amazing blog{% endblock %}
+{% block title %}Book Review{% endblock %}
 
 {% block content %}
     <header>
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-2">{{ user.alias }}'s Page.</h1>
-                <hr class="my-4">
-                <p><strong>Registered: </strong>{{ user.created_at }}</p>
-                <p><strong>User ID: </strong>{{ user.id }}</p>
-                <p><strong>First: </strong>{{ user.first_name }}</p>
-                <p><strong>Last: </strong>{{ user.last_name }}</p>
-                <p><strong>Alias: </strong>{{ user.alias }}</p>
-                <p><strong>Email: </strong>{{ user.email }}</p>
-                <p><strong>Description: </strong>{{ user.description }}</p>
-                <small><a href="/edit">edit</a></small>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="display-2">{{user.first_name}} {{user.last_name}}</h1><br>
+                    </div>
+                    <div class="col-md-4">
+                        <p><strong>First Name:</strong> {{user.first_name}}</p>
+                        <p><strong>Last Name: </strong>{{user.last_name}}</p>
+                        <p><strong>Email:</strong> {{user.email}}</p>
+                        <p><strong>Total Reviews:</strong> {{total_review}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     <div class="row">
-        <div class="col-md-6">
-            {% if messages %}
-            <div class="alert alert-info" role="messages">
-                {% for message in messages %}
-                <p class="{{ message.tags }}">{{ message }}</p>
-            {% endfor %}
-            {% endif %}
+        <div class="container">
+            <div class="col-md-6">
+                {% if messages %}
+                <div class="alert alert-info" role="messages">
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
+                <h4>Books reviewed:</h4>
+                <hr>
+                {% for review in user.reviews.all %}
+                <h6><a href="/books/{{review.book.id}}">{{review.book.title}}</a></h6>
+                <small>Posted on {{review.created_at}}</small>
+                <hr>
+                <br>
+                {% endfor %}
+                
             </div>
-            <div class="col-md-8">
-                <h3>Recent Reviews:</h3>
-                <h5><a href="/book/{{ book.id }}">{{ book.title }}</a></h5>
-                {% for review in reviews %}
-                <h5>{{ review.bookreviewed }} </h5>
-                <h6>{{ review.review }} </h6>
-                <small>Posted by {{ review.reviewer.alias }}<i> at {{ review.created_at }}.</i></small>
-                <hr class="my-6">
-                {% endfor %}    
-            </div>
-            <div class="col-md-2">
-                <h3></h3>
-                <p></p>
-            </div>
+            <div class="col-md-6"></div>
         </div>
     </div>
 {% endblock %}
-
-

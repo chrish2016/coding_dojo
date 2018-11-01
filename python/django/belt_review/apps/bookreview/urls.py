@@ -1,4 +1,4 @@
-"""belt_review URL Configuration
+"""trip_buddy URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -14,20 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-
-from django.conf.urls import url
 from . import views
+
 urlpatterns = [
-    url(r'^$', views.index),
-    url(r'^register$', views.register),
-    url(r'^login$', views.login),
-    url(r'^logout$', views.logout),
-    url(r'^dashboard$', views.dashboard),
-    url(r'^user/(?P<user_id>\d+)$', views.show),
-    url(r'^book/form$', views.bookform),
-    url(r'^book/add$', views.add),
-    url(r'^book/(?P<book_id>\d+)/$', views.bookpage),
-    url(r'^book/(?P<book_id>\d+)/minireview$', views.minireview),
-    url(r'^book/(?P<book_id>\d+)/delete', views.delete)
+    url(r'^$', views.dashboard),
+    url(r'^bookform$', views.bookform),
+    url(r'^addbook$', views.addbook),
+    url(r'^(?P<book_id>\d+)$', views.book),
+    url(r'^(?P<book_id>\d+)/addreview$', views.addreview),
+    url(r'^(?P<book_id>\d+)/deletereview$', views.deletereview),
 ]

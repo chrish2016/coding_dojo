@@ -16,7 +16,9 @@ def dashboard(request):
     request.session['user_id']
     context ={
         'user': User.objects.get(id=request.session['user_id']),
-        'trips': Trip.objects.all().exclude(travelers_id=request.session['user_id'])
+        'trips': Trip.objects.all().filter(planner=request.session['user_id']),
+        'joined_trips': Trip.objects.filter(travelers=request.session['user_id']),
+        'other_trips': Trip.objects.all().exclude(planner=request.session['user_id']).exclude(travelers=request.session['user_id'])
     }
     return render(request, 'travel/dashboard.html', context)
 
@@ -35,29 +37,44 @@ def processtrip(request):
         description=request.POST['description'],
         trip_start=request.POST['trip_start'],
         trip_end=request.POST['trip_end'],
-        travelers=User.objects.get(id=request.session['user_id'])
+        planner=User.objects.get(id=request.session['user_id'])
     )
     return redirect('/travels')
 
 def showtrip(request, trip_id):
+    # this_trip = Trip.objects.get(id=trip_id)
+    # this_traveler = Trip.objects.get(travelers=trip_id)
+    # this_traveler.trips.all()
+
     context = {
         'trip': Trip.objects.get(id=trip_id),
-        'users': User.objects.all(),
-        'user': User.objects.get(id=request.session['user_id'])
+        'trips': Trip.objects.all(),
+        'this_trip': Trip.objects.get(id=trip_id),
+        'travelers': Trip.objects.values('travelers').filter(id=trip_id)
     }
     return render(request, 'travel/trip.html', context)
+
+# def showtrip(request, trip_id):
+#     a = Trip.objects.get(id=trip_id)
+#     a.travelers.all()
+    
+#     context = {
+#         'trip': Trip.objects.get(id=trip_id),
+#         'a': Trip.objects.get(id=trip_id),
+#         'travelers': a.travelers.all()
+#     }
+#     return render(request, 'travel/trip.html', context)
 
 def deletetrip(request, trip_id):
     trip = Trip.objects.get(id=trip_id).delete()
     return redirect('/travels')
 
 def jointrip(request, trip_id):
-    context = {
-        'trip': Trip.objects.get(id=trip_id),
-        'users': User.objects.all(),
-        'user': User.objects.get(id=request.session['user_id'])
-    }
-    trip_to_add = Trip.objects.get(id=trip_id)
-    trip_to_add.travelers = User.objects.get(id=request.session['user_id'])
-    trip_to_add.save()
-    return render(request, 'travel/trip.html', context)
+    user_id=request.session['user_id']
+    Trip.objects.get(id=trip_id).travelers.add(User.objects.get(id=request.session['user_id']))
+    return redirect('/travels')
+
+def canceltrip(request, trip_id):
+    user = request.session['user_id']
+    Trip.objects.get(id=trip_id).travelers.remove(request.session['user_id'])
+    return redirect('/travels')

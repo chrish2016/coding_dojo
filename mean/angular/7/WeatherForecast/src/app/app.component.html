@@ -1,0 +1,18 @@
+<div id="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Dojo Weather Forecast</h1>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a [routerLink]="['seattle']" class="nav-item nav-link">Seattle, WA</a>
+        <a [routerLink]="['sanjose']" class="nav-item nav-link">San Jose, CA</a>
+        <a [routerLink]="['burbank']" class="nav-item nav-link">Burbank, CA</a>
+        <a [routerLink]="['dallas']" class="nav-item nav-link">Dallas, TX</a>
+        <a [routerLink]="['washington']" class="nav-item nav-link">Washington D.C.</a>
+        <a [routerLink]="['chicago']" class="nav-item nav-link">Chicago, IL</a>
+      </div>
+    </div>
+  </nav>
+</div>
+<router-outlet></router-outlet>

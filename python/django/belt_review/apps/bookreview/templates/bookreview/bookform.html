@@ -1,57 +1,75 @@
 {% extends "bookreview/base.html" %}
-
 {% load static %}
 
-{% block title %}My amazing blog{% endblock %}
+{% block title %}Book Review{% endblock %}
 
 {% block content %}
     <header>
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-2">Add a book here!</h1>
-                <hr class="my-6">
-                <p class="lead">Fill out the form below:</p>
+                <h1 class="display-4">Book Form Page</h1>
+                <hr class="my-4">
+                <p class="lead">Below you can add a book and review!</p>
             </div>
         </div>
     </header>
- 
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6">
+                {% if messages %}
+                <div class="alert alert-info" role="messages">
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <form action="/book/add" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                        <h5><label for="exampleInputPassword1">Title:</label></h5>
-                    <input type="text" class="form-control form-control-sm." name="title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter title">
-                </div><br>
-                <div class="form-group">
-                    <h5><label for="exampleInputPassword1">Author:</label></h5>
-                    <input type="text" class="form-control" name="author" id="exampleInputPassword1" placeholder="…or add a new author here:"><br>
-                        <select name="author">
-                            <option name="author" value="{{book.id}}"></option>
-                            {% for book in books %}<option name="author" value="{{book.author}}">{{book.author}}</option>{% endfor %}
+                <h4>Add a new book title and review:</h4><br>
+                    <form action="/books/addbook" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h6><label for="exampleInputPassword1">Title:</label></h6>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="title of the book">
+                    </div>
+                    <div class="form-group">
+                        <h6><label for="exampleInputPassword1">Author:</label></h6>
+                        <select name="author" id="author" value="book.author" class="custom-select custom-select-sm mb-3">
+                            <option selected>Choose an author from the menu:</option>
+                            <option value=""></option>
+                            {% for book in books %}
+                            <option value="{{book.author}}">{{book.author}}</option>
+                            {% endfor %}
+                        </select><br>
+                        <small>(or add a new author)</small>
+                        <input type="text" class="form-control" name="new_author" id="author" placeholder="author of the book">
+                    </div>
+                    <div class="form-group">
+                        <h6><label for="exampleInputPassword1">Review:</label></h6>
+                    <textarea name="review" class="form-control" id="review" placeholder="write your review here…"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h6><label for="exampleInputPassword1">Rating:</label></h6>
+                        <select name="rating" id="rating" class="custom-select custom-select-sm mb-3">
+                            <option></option>
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Star</option>
+                            <option value="3">3 Star</option>
+                            <option value="4">4 Star</option>
+                            <option value="5">5 Star</option>
                         </select>
-                        <p></p> 
-                </div><br>
-                <div class="form-group">
-                        <h5><label for="exampleInputPassword1">Review:</label></h5>
-                    <textarea name="review" class="form-control" id="exampleInputPassword1" placeholder="write your review here…"></textarea>
-                </div><br>
-                <div class="form-group">
-                    <h5><label for="exampleInputPassword1">Rating:</label></h5>
-                    <select name="rating">
-                        <option value="1"></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    Stars.
-                </div><br>
-                <button type="submit" class="btn btn-dark">Submit</button>
-                </form>
-                <a class="nav-link" href="/dashboard">Cancel</a>
+                    </div><br>
+                        <button type="submit" class="btn btn-info">Submit Book & Review</button>
+                    </form>
+            </div>
+            <div class="col-md-2">
+                <h3></h3>
+                <p></p>
+            </div>
             <div class="col-md-4">
             </div>
         </div>
